@@ -22,6 +22,7 @@ export default function Intro() {
             aria-label="Your Name"
             autoComplete="given-name"
             />
+            <input type="hidden" name="_action" value="newUser"></input>
             <button type="submit" className="btn btn--dark">
                 <span>Create Account</span>
                 <UserPlusIcon width={20}/>

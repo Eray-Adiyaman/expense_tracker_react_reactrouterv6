@@ -6,7 +6,7 @@ import AddExpenseForm from "../components/AddExpenseForm";
 import { toast } from "react-toastify";
 
 //helper functions
-import { createExpense, fetchData } from "../helpers";
+import { createExpense, fetchData, MockupDelay } from "../helpers";
 
 //Loader Funtion
 export function dashboardLoader() {
@@ -21,6 +21,8 @@ export function dashboardLoader() {
 //so its submited to here dashboard and will handle the submit action here,
 //since its a request the request obj can we destructured here
 export async function dashboardAction({ request }) {
+  await MockupDelay();
+  
   const data = await request.formData();
   const { _action, ...values } = Object.fromEntries(data);
 

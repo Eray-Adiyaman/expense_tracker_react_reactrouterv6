@@ -3,10 +3,11 @@ import { useLoaderData } from "react-router-dom";
 
 import Intro from "../components/Intro";
 import AddExpenseForm from "../components/AddExpenseForm";
+import AddExpenseFormModifyable from "../components/AddExpenseFormModifyable";
 import { toast } from "react-toastify";
 
 //helper functions
-import { createExpense, fetchData, MockupDelay } from "../helpers";
+import { createExpense, createExpenseModifyable, fetchData, MockupDelay } from "../helpers";
 
 //Loader Funtion
 export function dashboardLoader() {
@@ -22,7 +23,7 @@ export function dashboardLoader() {
 //since its a request the request obj can we destructured here
 export async function dashboardAction({ request }) {
   await MockupDelay();
-  
+
   const data = await request.formData();
   const { _action, ...values } = Object.fromEntries(data);
 
@@ -39,12 +40,28 @@ export async function dashboardAction({ request }) {
 
   console.log({ data, request }, values);
 
-  if(_action === "createExpense"){
-    try{
-      createExpense({name: values.newExpense, amount: values.newExpenseAmount})
-      return toast.success("New Expense Added!")
-    }catch{
-      throw new Error("There was a problem creating your expense.")
+  if (_action === "createExpense") {
+    try {
+      createExpense({
+        name: values.newExpense,
+        amount: values.newExpenseAmount,
+      });
+      return toast.success("New Expense Added!");
+    } catch {
+      throw new Error("There was a problem creating your expense.");
+    }
+  }
+
+  if (_action === "createExpenseModifyable") {
+    try {
+      createExpenseModifyable({
+        name: values.newExpense,
+        amount: values.newExpenseAmount,
+        expenseId: values.newExpenseAmount,
+      });
+      return toast.success("New Expense  Added!");
+    } catch {
+      throw new Error("There was a problem creating your expense.");
     }
   }
 
@@ -63,12 +80,23 @@ export default function Dashboard() {
             Welcome Back,<span className="accent"> {userName}</span>
           </h1>
           <div className="grid-sm">
-            {/* {expenses ? () : () } */}
-            <div className="gird-lg">
-              <div className="flex-lg">
+            {expenses && expenses.length > 0 ? (
+              <div className="gird-lg">
+                <div className="flex-lg">
+                  <AddExpenseForm />
+                  <AddExpenseFormModifyable expenses={expenses} />
+                </div>
+              </div>
+            ) : (
+              <div className="grid-sm">
+                <p>Be Wise With Your Money and Spendings</p>
+                <p>
+                  Personal budget tracking is the secret to financial stability.
+                  Start your track today.
+                </p>
                 <AddExpenseForm />
               </div>
-            </div>
+            )}
           </div>
         </div>
       ) : (

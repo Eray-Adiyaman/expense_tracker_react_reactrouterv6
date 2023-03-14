@@ -4,6 +4,7 @@ import { useLoaderData } from "react-router-dom";
 import Intro from "../components/Intro";
 import AddExpenseForm from "../components/AddExpenseForm";
 import AddExpenseFormModifyable from "../components/AddExpenseFormModifyable";
+import ExpenseItem from "../components/ExpenseItem";
 import { toast } from "react-toastify";
 
 //helper functions
@@ -85,6 +86,12 @@ export default function Dashboard() {
                 <div className="flex-lg">
                   <AddExpenseForm />
                   <AddExpenseFormModifyable expenses={expenses} />
+                </div>
+                <h2>Existing Budgets</h2>
+                <div className="expenses">
+                  {expenses.map((expense) => (
+                    <ExpenseItem key={expense.id} expense={expense} />
+                  ))}
                 </div>
               </div>
             ) : (

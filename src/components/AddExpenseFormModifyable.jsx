@@ -24,7 +24,7 @@ export default function AddExpenseFormModifyable({ expenses }) {
   return (
     <div className="form-wrapper">
       <h2 className="h3">
-        Add new{" "}
+        Add New{" "}
         <span className="accent">
           {expenses.length === 1 &&
             `${expenses.map((expense) => expense.name)}`}

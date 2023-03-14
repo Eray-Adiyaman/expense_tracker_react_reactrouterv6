@@ -52,3 +52,35 @@ export const createExpenseModifyable = ({ name, amount, expenseId }) => {
 export const deleteItem = ({ key }) => {
   return localStorage.removeItem(key);
 };
+
+/* total spent*/
+export const calculateSpentAmount = (budgetId) =>{
+  const expenses = fetchData("expensesModifyable") ?? [];
+  const budgetSpent = expenses.reduce((acc,expense)=>{
+    if(expense.expenseId !== budgetId) return acc
+
+    //add the current amount to total
+    return acc += expense.amount
+
+  },0)
+  return budgetSpent;
+
+}
+
+/* */
+export const formatPercentage = (amount) =>{
+  return amount.toLocaleString(undefined,{
+    style: "percent",
+    minimumFractionDigits:0,
+    currency: "EUR"
+  })
+
+}
+
+
+export const formatCurrency = (amount) => {
+  return amount.toLocaleString(undefined, {
+    style: "currency",
+    currency: "EUR"
+  })
+}

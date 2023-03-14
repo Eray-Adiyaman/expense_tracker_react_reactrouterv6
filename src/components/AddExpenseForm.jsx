@@ -23,7 +23,7 @@ export default function AddExpenseForm() {
       <h2 className="h3">Create budget</h2>
       <fetcher.Form method="post" className="grid-sm" ref={formRef}>
         <div className="grid-xs">
-          <label htmlFor="newExpense">Expense Name</label>
+          <label htmlFor="newExpense">Budget Name</label>
           <input
             type="text"
             name="newExpense"
@@ -33,7 +33,7 @@ export default function AddExpenseForm() {
           />
         </div>
         <div className="grid-xs">
-          <label htmlFor="newExpenseAmount">Expense Amount</label>
+          <label htmlFor="newExpenseAmount">Budget Amount</label>
           <input
             type="number"
             step="0.01"

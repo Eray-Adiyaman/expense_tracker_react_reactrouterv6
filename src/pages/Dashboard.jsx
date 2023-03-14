@@ -57,7 +57,7 @@ export async function dashboardAction({ request }) {
       createExpenseModifyable({
         name: values.newExpense,
         amount: values.newExpenseAmount,
-        expenseId: values.newExpenseAmount,
+        expenseId: values.newExpenseBudget,
       });
       return toast.success("New Expense  Added!");
     } catch {

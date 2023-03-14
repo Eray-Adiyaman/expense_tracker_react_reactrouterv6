@@ -39,7 +39,7 @@ export default function AddExpenseFormModifyable({ expenses }) {
               type="text"
               name="newExpense"
               id="newExpense"
-              placeholder="e.g, Transport"
+              placeholder="e.g, Bus Allowence"
               ref={focusRef}
               required
             ></input>
@@ -52,7 +52,7 @@ export default function AddExpenseFormModifyable({ expenses }) {
               inputMode="decimal"
               name="newExpenseAmount"
               id="newExpenseAmount"
-              placeholder="e.g, 230"
+              placeholder="e.g, 50€"
               required
             ></input>
           </div>

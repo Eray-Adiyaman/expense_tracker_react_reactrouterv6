@@ -39,9 +39,9 @@ export const createExpenseModifyable = ({ name, amount, expenseId }) => {
     expenseId: expenseId,
   };
 
-  const existingExpensesModifyable = fetchData("expenses") ?? [];
+  const existingExpensesModifyable = fetchData("expensesModifyable") ?? [];
   return localStorage.setItem(
-    "expenses",
+    "expensesModifyable",
     JSON.stringify([...existingExpensesModifyable, newItem])
   );
 };

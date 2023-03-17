@@ -70,6 +70,7 @@ export default function AddExpenseFormModifyable({ expenses }) {
                 );
               })}
           </select>
+          </div>
           <input type="hidden" name="_action" value="createExpenseModifyable"></input>
           <button
             type="submit"
@@ -85,7 +86,7 @@ export default function AddExpenseFormModifyable({ expenses }) {
               </>
             )}
           </button>
-        </div>
+        
       </fetcher.Form>
     </div>
   );

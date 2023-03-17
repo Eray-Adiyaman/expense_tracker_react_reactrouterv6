@@ -9,7 +9,7 @@ export default function ExpenseItem({ expense }) {
     <div 
       className="expense"
       style={
-        {"--accent": color}
+        {"--accent": color,"margin-top": 20,"margin-bottom":20}
       }
     >
         <div className="progress-text">

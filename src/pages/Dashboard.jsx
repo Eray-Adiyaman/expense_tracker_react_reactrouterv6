@@ -1,5 +1,5 @@
 //ReactRouter imports
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 import Intro from "../components/Intro";
 import AddExpenseForm from "../components/AddExpenseForm";
@@ -9,14 +9,19 @@ import Table from "../components/Table";
 import { toast } from "react-toastify";
 
 //helper functions
-import { createExpense, createExpenseModifyable, fetchData, MockupDelay } from "../helpers";
+import {
+  createExpense,
+  createExpenseModifyable,
+  fetchData,
+  MockupDelay,
+} from "../helpers";
 
 //Loader Funtion
 export function dashboardLoader() {
   const userName = fetchData("userName");
   const expenses = fetchData("expenses");
   const expensesModifyable = fetchData("expensesModifyable");
-  return { userName, expenses ,expensesModifyable};
+  return { userName, expenses, expensesModifyable };
 }
 
 //action
@@ -66,14 +71,11 @@ export async function dashboardAction({ request }) {
       throw new Error("There was a problem creating your expense.");
     }
   }
-
-
-
 }
 
 export default function Dashboard() {
-  const { userName, expenses,expensesModifyable } = useLoaderData();
-  console.log(expensesModifyable)
+  const { userName, expenses, expensesModifyable } = useLoaderData();
+  console.log(expensesModifyable);
   return (
     <>
       {userName ? (
@@ -94,15 +96,21 @@ export default function Dashboard() {
                     <ExpenseItem key={expense.id} expense={expense} />
                   ))}
                 </div>
-                {
-                  expensesModifyable && expensesModifyable.length > 0 && 
-                  (
-                    <div className="grid-md"> 
-                      <h2> Recent Expenses</h2>
-                       <Table  expensesModifyable={expensesModifyable.sort((a,b)=> b.createdAt - a.createdAt)} />
-                    </div>
-                  )
-                }
+                {expensesModifyable && expensesModifyable.length > 0 && (
+                  <div className="grid-md">
+                    <h2> Recent Expenses</h2>
+                    <Table
+                      expensesModifyable={expensesModifyable
+                        .sort((a, b) => b.createdAt - a.createdAt)
+                        .slice(0, 8)}
+                    />
+                    {expensesModifyable.length > 8 && (
+                      <Link to="expenses" className="btn btn--dark">
+                        view all expenses
+                      </Link>
+                    )}
+                  </div>
+                )}
               </div>
             ) : (
               <div className="grid-sm">

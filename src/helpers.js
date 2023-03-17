@@ -1,6 +1,6 @@
 //mockup delay
 export const MockupDelay = () =>
-  new Promise((res) => setTimeout(res, Math.random() * 3500));
+  new Promise((res) => setTimeout(res, Math.random() * 100));
 
 //rcolor
 const generateRandomColor = () => {

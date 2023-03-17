@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import {
   createExpense,
   createExpenseModifyable,
+  deleteItem,
   fetchData,
   MockupDelay,
 } from "../helpers";
@@ -71,11 +72,26 @@ export async function dashboardAction({ request }) {
       throw new Error("There was a problem creating your expense.");
     }
   }
+
+  if (_action === "deleteExpense") {
+    try {
+      deleteItem({
+        key:"expensesModifyable",
+        id:values.expenseId,
+      });
+      return toast.success("Expense deleted!");
+    } catch {
+      throw new Error("There was a problem deleting your expense.");
+    }
+  }
+
+
+
 }
 
 export default function Dashboard() {
   const { userName, expenses, expensesModifyable } = useLoaderData();
-  console.log(expensesModifyable);
+  //console.log(expensesModifyable);
   return (
     <>
       {userName ? (

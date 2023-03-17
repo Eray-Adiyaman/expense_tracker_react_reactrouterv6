@@ -1,12 +1,32 @@
 import { useLoaderData } from "react-router-dom";
+import { toast } from "react-toastify";
 import Table from "../components/Table";
-import { fetchData } from "../helpers";
+import { deleteItem, fetchData } from "../helpers";
 
 //Loader Funtion
-export function expensesLoader() {
+export  async function expensesLoader() {
   const expensesModifyable = fetchData("expensesModifyable");
   return { expensesModifyable };
 }
+
+export async function expensesAction( { request } ) {
+   const data = await request.formData();
+   const {_action,...values} = Object.fromEntries(data);
+
+  if (_action === "deleteExpense") {
+    try {
+      deleteItem({
+        key:"expensesModifyable",
+        id:values.expenseId,
+      });
+      return toast.success("Expense deleted!");
+    } catch {
+      throw new Error("There was a problem deleting your expense.");
+    }
+  }
+
+}
+
 
 export default function ExpensesPage() {
   const { expensesModifyable } = useLoaderData();

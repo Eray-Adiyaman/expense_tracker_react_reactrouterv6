@@ -1,6 +1,6 @@
 //mockup delay
 export const MockupDelay = () =>
-  new Promise((res) => setTimeout(res, Math.random() * 100));
+  new Promise((res) => setTimeout(res, Math.random() * 3500));
 
 //rcolor
 const generateRandomColor = () => {
@@ -12,6 +12,15 @@ const generateRandomColor = () => {
 export const fetchData = (key) => {
   return JSON.parse(localStorage.getItem(key));
 };
+
+//Get all items from localS
+export const getAllMatchingItems = ({category,key,value}) => {
+  const data = fetchData(category) ?? [];
+  return data.filter((item) => item[key] === value)
+}
+
+
+
 
 //create Expense
 export const createExpense = ({ name, amount }) => {
@@ -48,8 +57,14 @@ export const createExpenseModifyable = ({ name, amount, expenseId }) => {
 
 
 
-//delete item
-export const deleteItem = ({ key }) => {
+// Delete item from localS
+export const deleteItem = ({ key, id }) => {
+  const existingData = fetchData(key);
+  console.log(existingData,"existing data")
+  if (id) {
+    const newData = existingData.filter((item) => item.id !== id);
+    return localStorage.setItem(key, JSON.stringify(newData));
+  }
   return localStorage.removeItem(key);
 };
 

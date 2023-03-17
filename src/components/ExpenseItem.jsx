@@ -3,7 +3,7 @@ import { calculateSpentAmount, formatCurrency, formatPercentage } from "../helpe
 export default function ExpenseItem({ expense }) {
   const { id , name ,amount ,color} = expense;
   const spent = calculateSpentAmount(id);
-  console.log(color)
+  // console.log(color)
   
     return (
     <div 

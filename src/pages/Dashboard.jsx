@@ -5,6 +5,7 @@ import Intro from "../components/Intro";
 import AddExpenseForm from "../components/AddExpenseForm";
 import AddExpenseFormModifyable from "../components/AddExpenseFormModifyable";
 import ExpenseItem from "../components/ExpenseItem";
+import Table from "../components/Table";
 import { toast } from "react-toastify";
 
 //helper functions
@@ -14,8 +15,8 @@ import { createExpense, createExpenseModifyable, fetchData, MockupDelay } from "
 export function dashboardLoader() {
   const userName = fetchData("userName");
   const expenses = fetchData("expenses");
-
-  return { userName, expenses };
+  const expensesModifyable = fetchData("expensesModifyable");
+  return { userName, expenses ,expensesModifyable};
 }
 
 //action
@@ -71,8 +72,8 @@ export async function dashboardAction({ request }) {
 }
 
 export default function Dashboard() {
-  const { userName, expenses } = useLoaderData();
-
+  const { userName, expenses,expensesModifyable } = useLoaderData();
+  console.log(expensesModifyable)
   return (
     <>
       {userName ? (
@@ -93,6 +94,15 @@ export default function Dashboard() {
                     <ExpenseItem key={expense.id} expense={expense} />
                   ))}
                 </div>
+                {
+                  expensesModifyable && expensesModifyable.length > 0 && 
+                  (
+                    <div className="grid-md"> 
+                      <h2> Recent Expenses</h2>
+                       <Table  expensesModifyable={expensesModifyable.sort((a,b)=> b.createdAt - a.createdAt)} />
+                    </div>
+                  )
+                }
               </div>
             ) : (
               <div className="grid-sm">

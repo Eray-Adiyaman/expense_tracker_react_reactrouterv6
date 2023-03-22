@@ -69,7 +69,7 @@ export default function BudgetPage() {
         <span className="accent">{budget.name}</span>
       </h1>
       <div className="flex-lg">
-        <ExpenseItem expense={budget} />
+        <ExpenseItem expense={budget} showDelete={true} />
         <AddExpenseFormModifyable expenses={[budget]} />
       </div>
       {expenses && expenses.length > 0 && (
